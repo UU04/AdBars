@@ -14,8 +14,9 @@ import org.bukkit.entity.Player;
 
 public class voids {
 	public static HashMap<Player, Integer> web = new HashMap<Player, Integer>(); 
-	public static BossBar bs = Bukkit.createBossBar("title", Random(), BarStyle.SOLID);
+	public static BossBar bs = Bukkit.createBossBar("title", Color(), BarStyle.SOLID); // static = all players share roop stage!!!
 	public static ChatColor tc=  ChatColor.GRAY;
+	public static int a, b = 0;
 	
 	public static String watermark = "AdBars v1.1" + ChatColor.GRAY + " :Made by Team Dotmagic";
 	public static String titles(int a) {
@@ -49,7 +50,7 @@ public class voids {
 				if (point <= 0) {
 					bs.removePlayer(p);
 					
-					bs.setColor(Random());
+					bs.setColor(Color());
 					bs.setTitle(RandomWriting());
 					
 					point = total;
@@ -59,7 +60,6 @@ public class voids {
 				
 				double nwp = point/total;
 				bs.setProgress(nwp);
-				//Bukkit.broadcastMessage(nwp + "nwp"+ point + "point");
 			}
 		}, 0L, 2L);
 		
@@ -67,11 +67,11 @@ public class voids {
 
 	}
 
-	public static BarColor Random() { //not random, sequencial route.
-		Random rand = new Random();
-		int i = rand.nextInt(5);
+	public static BarColor Color() {
+		a++;
+		if(a == 5) a = 0;
 
-		switch (i) {
+		switch (a) {
 		case 0:
 			tc = ChatColor.RED;
 			return BarColor.RED;
@@ -93,9 +93,9 @@ public class voids {
 	}
 
 	public static String RandomWriting() {
-		Random rand = new Random();
-		int i = rand.nextInt(7);
+		b++;
+		if(b == 8 ) b = 0;
 
-		return tc + titles(i);
+		return tc + titles(b);
 	}
 }
